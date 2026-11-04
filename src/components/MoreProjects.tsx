@@ -15,7 +15,7 @@ type Project = {
 };
 
 const LLM_REPO = `${GITHUB}/llm_projects`;
-const DA_REPO = `${GITHUB}/Data_Analyst_Porfolio_projects`;
+const DA_REPO = `${GITHUB}/Data_Analyst_Portfolio_projects`;
 
 const PROJECTS: Project[] = [
   {
