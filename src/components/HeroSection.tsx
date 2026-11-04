@@ -32,7 +32,7 @@ export default function HeroSection() {
         strength={3}
         activeTransition="transform 0.3s ease-out"
         inactiveTransition="transform 0.6s ease-in-out"
-        className="absolute left-1/2 top-1/2 z-10 w-[300px] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[420px] sm:translate-y-0 md:w-[480px] lg:w-[560px]"
+        className="absolute left-1/2 top-1/2 z-10 w-[300px] -translate-x-1/2 -translate-y-1/2 sm:bottom-24 sm:top-auto sm:w-[420px] sm:translate-y-0 md:w-[480px] lg:w-[560px]"
       >
         <FadeIn delay={0.6} y={30}>
           <Avatar />

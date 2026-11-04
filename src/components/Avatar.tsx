@@ -48,7 +48,7 @@ export default function Avatar() {
         <img
           src="/avatar.webp"
           alt="Ankit Singh 3D avatar"
-          className="mx-auto max-h-[78vh] w-auto"
+          className="mx-auto max-h-[min(78vh,calc(100svh_-_18rem))] w-auto"
           style={{ filter: 'drop-shadow(0 30px 40px rgba(0,0,0,0.7)) drop-shadow(0 0 1px rgba(215,226,234,0.25))' }}
           onError={() => setMissing(true)}
         />
