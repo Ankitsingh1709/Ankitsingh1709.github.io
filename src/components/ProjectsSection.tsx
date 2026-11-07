@@ -1,8 +1,8 @@
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import { useRef } from 'react';
-import FadeIn from './FadeIn';
 import MoreProjects from './MoreProjects';
 import { LiveProjectButton } from './Buttons';
+import { AGENT_COLORS, Built } from './AgentBuild';
 
 type Project = {
   name: string;
@@ -11,7 +11,7 @@ type Project = {
   stack: string[];
   href: string;
   cta: string;
-  images?: [string, string, string];
+  images: [string, string, string];
 };
 
 const PROJECTS: Project[] = [
@@ -29,8 +29,9 @@ const PROJECTS: Project[] = [
     category: 'GenAI · Open source',
     desc: 'LangGraph agent for call-centre QA. Hybrid RAG (FAISS + BM25) over policy documents, rubric scoring of transcripts, role-based access, conversation memory and 42 tests.',
     stack: ['Python', 'LangGraph', 'FAISS', 'BM25', 'Streamlit'],
-    href: 'https://github.com/Ankitsingh1709/llm_projects',
+    href: 'https://github.com/Ankitsingh1709/llm_projects/tree/main/Call-Desk-Agent',
     cta: 'View Code',
+    images: ['/projects/call-desk-1.jpg', '/projects/call-desk-2.jpg', '/projects/call-desk-3.jpg'],
   },
   {
     name: 'Drape',
@@ -39,6 +40,7 @@ const PROJECTS: Project[] = [
     stack: ['GenAI', 'Google Cloud Run'],
     href: 'https://drape-173367747529.us-central1.run.app',
     cta: 'Live Project',
+    images: ['/projects/drape-1.jpg', '/projects/drape-2.jpg', '/projects/drape-3.jpg'],
   },
 ];
 
@@ -72,39 +74,26 @@ function Card({ project, index, progress }: { project: Project; index: number; p
           <LiveProjectButton href={project.href}>{project.cta}</LiveProjectButton>
         </div>
 
-        {project.images ? (
+          <Built agent="agent/design" color={AGENT_COLORS[3]} className="w-full">
           <div className="flex gap-3 sm:gap-4">
             <div className="flex w-[40%] flex-col gap-3 sm:gap-4">
-              <img src={project.images[0]} alt={`${project.name} screenshot`} className={`w-full object-cover ${ROUNDED}`} style={{ height: 'clamp(130px, 16vw, 230px)' }} />
-              <img src={project.images[1]} alt={`${project.name} screenshot`} className={`w-full object-cover ${ROUNDED}`} style={{ height: 'clamp(160px, 22vw, 340px)' }} />
+              <img src={project.images[0]} alt={`${project.name} screenshot`} className={`w-full object-cover object-left-top ${ROUNDED}`} style={{ height: 'clamp(130px, 16vw, 230px)' }} />
+              <img src={project.images[1]} alt={`${project.name} screenshot`} className={`w-full object-cover object-left-top ${ROUNDED}`} style={{ height: 'clamp(160px, 22vw, 340px)' }} />
             </div>
-            <div className="w-[60%]">
-              <img src={project.images[2]} alt={`${project.name} screenshot`} className={`h-full w-full object-cover object-left ${ROUNDED}`} />
+            <div className="relative w-[60%]">
+              <img src={project.images[2]} alt={`${project.name} screenshot`} className={`absolute inset-0 h-full w-full object-cover object-left-top ${ROUNDED}`} />
             </div>
           </div>
-        ) : (
-          <div
-            className={`flex flex-col justify-end gap-6 p-6 sm:p-10 md:p-14 ${ROUNDED}`}
-            style={{
-              minHeight: 'clamp(300px, 40vw, 590px)',
-              background: 'radial-gradient(120% 120% at 100% 0%, #7621B0 0%, #18011F 45%, #0C0C0C 100%)',
-            }}
-          >
-            <p className="max-w-3xl font-light leading-relaxed text-[#D7E2EA]" style={{ fontSize: 'clamp(1rem, 2vw, 1.6rem)' }}>
-              {project.desc}
-            </p>
-            <Stack items={project.stack} />
-          </div>
-        )}
+          </Built>
 
-        {project.images && (
-          <div className="mt-5 flex flex-col gap-4 px-2 md:flex-row md:items-center md:justify-between">
+          <Built agent="agent/writer" color={AGENT_COLORS[0]} delay={0.5} className="mt-5 w-full">
+          <div className="flex flex-col gap-4 px-2 md:flex-row md:items-center md:justify-between">
             <p className="max-w-2xl font-light leading-relaxed text-[#D7E2EA]/80" style={{ fontSize: 'clamp(0.85rem, 1.3vw, 1.1rem)' }}>
               {project.desc}
             </p>
             <Stack items={project.stack} />
           </div>
-        )}
+          </Built>
       </motion.div>
     </div>
   );
@@ -131,11 +120,11 @@ export default function ProjectsSection() {
       id="projects"
       className="relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 pb-20 pt-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 md:-mt-14 md:rounded-t-[60px] md:px-10 md:pt-28"
     >
-      <FadeIn y={40}>
+      <Built agent="agent/planner" color={AGENT_COLORS[2]} className="mx-auto w-fit">
         <h2 className="hero-heading mb-10 text-center font-black uppercase leading-none tracking-tight" style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}>
           Projects
         </h2>
-      </FadeIn>
+      </Built>
       <div ref={ref} className="mx-auto max-w-6xl">
         {PROJECTS.map((p, i) => (
           <Card key={p.name} project={p} index={i} progress={scrollYProgress} />

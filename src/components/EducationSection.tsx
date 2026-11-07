@@ -1,4 +1,4 @@
-import FadeIn from './FadeIn';
+import { AGENT_COLORS, Built } from './AgentBuild';
 
 const EDUCATION = [
   { title: 'MBA, Business Administration', place: 'Hochschule Hof, Germany', date: '2021 – 2023' },
@@ -18,6 +18,12 @@ const CERTS = [
     place: 'Microsoft',
     date: '2025',
     href: 'https://learn.microsoft.com/en-us/users/ankitsingh-4978/credentials/99b649b902cffef5',
+  },
+  {
+    title: 'Generative AI & Agentic AI for Developers',
+    place: 'IIT Patna · 6-month programme',
+    date: 'Oct 2026',
+    href: 'https://verification.iitpatna.com/verify/IITP/GID/USDC/0112',
   },
   {
     title: 'Google Cloud Gen AI Academy',
@@ -40,7 +46,8 @@ function List({ heading, items }: { heading: string; items: Item[] }) {
     <div>
       <h3 className="mb-4 text-sm font-medium uppercase tracking-widest opacity-60">{heading}</h3>
       {items.map((item, i) => (
-        <FadeIn key={item.title} delay={i * 0.08} className="flex items-baseline justify-between gap-4 border-t border-[#0C0C0C]/15 py-5">
+        <Built key={item.title} agent="agent/verify" color={AGENT_COLORS[i % AGENT_COLORS.length]} delay={i * 0.15} className="w-full">
+        <div className="flex items-baseline justify-between gap-4 border-t border-[#0C0C0C]/15 py-5">
           <div>
             {item.href ? (
               <a href={item.href} target="_blank" rel="noreferrer" className="font-medium underline-offset-4 hover:underline" style={{ fontSize: 'clamp(1rem, 1.8vw, 1.5rem)' }}>
@@ -54,7 +61,8 @@ function List({ heading, items }: { heading: string; items: Item[] }) {
             <p className="font-light opacity-60">{item.place}</p>
           </div>
           <span className="shrink-0 font-light opacity-60">{item.date}</span>
-        </FadeIn>
+        </div>
+        </Built>
       ))}
     </div>
   );
@@ -63,9 +71,11 @@ function List({ heading, items }: { heading: string; items: Item[] }) {
 export default function EducationSection() {
   return (
     <section className="relative z-20 -mt-10 rounded-t-[40px] bg-white px-5 py-20 text-[#0C0C0C] sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:-mt-14 md:rounded-t-[60px] md:px-10 md:py-32">
-      <h2 className="mb-16 text-center font-black uppercase leading-none tracking-tight sm:mb-20" style={{ fontSize: 'clamp(2.5rem, 9vw, 130px)' }}>
-        Education
-      </h2>
+      <Built agent="agent/verify" color={AGENT_COLORS[4]} className="mx-auto mb-16 w-fit sm:mb-20">
+        <h2 className="text-center font-black uppercase leading-none tracking-tight" style={{ fontSize: 'clamp(2.5rem, 9vw, 130px)' }}>
+          Education
+        </h2>
+      </Built>
       <div className="mx-auto grid max-w-5xl gap-14 md:grid-cols-2 md:gap-16">
         <List heading="Degrees" items={EDUCATION} />
         <List heading="Certifications" items={CERTS} />

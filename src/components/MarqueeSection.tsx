@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { AGENT_COLORS, Built } from './AgentBuild';
 
 const DATA = ['SQL', 'Power BI', 'DAX', 'Python', 'Snowflake', 'Microsoft Fabric', 'Power Automate', 'dbt', 'AWS S3', 'BigQuery', 'Salesforce', 'Excel'];
 const AI = ['LangGraph', 'LangChain', 'RAG', 'Gemini', 'OpenAI', 'Ollama', 'Google ADK', 'MCP', 'Cloud Run', 'Copilot Studio', 'Streamlit', 'Forecasting'];
@@ -8,9 +9,9 @@ function Row({ items, transform, filled }: { items: string[]; transform: string;
   return (
     <div className="flex gap-3" style={{ transform, willChange: 'transform' }}>
       {tripled.map((item, i) => (
+        <Built key={i} agent={filled ? 'agent/genai' : 'agent/data'} color={AGENT_COLORS[i % AGENT_COLORS.length]} delay={(i % 5) * 0.15} className="shrink-0">
         <span
-          key={i}
-          className={`shrink-0 whitespace-nowrap rounded-2xl px-8 py-5 font-black uppercase tracking-tight md:px-12 md:py-8 ${
+          className={`block whitespace-nowrap rounded-2xl px-8 py-5 font-black uppercase tracking-tight md:px-12 md:py-8 ${
             filled ? 'text-white' : 'border-2 border-[#D7E2EA]/30 text-[#D7E2EA]'
           }`}
           style={{
@@ -20,6 +21,7 @@ function Row({ items, transform, filled }: { items: string[]; transform: string;
         >
           {item}
         </span>
+        </Built>
       ))}
     </div>
   );

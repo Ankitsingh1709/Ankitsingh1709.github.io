@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import FadeIn from './FadeIn';
+import { AGENT_COLORS, Built } from './AgentBuild';
 
 const JOBS = [
   {
@@ -37,14 +37,17 @@ const JOBS = [
 export default function ExperienceSection() {
   return (
     <section id="experience" className="rounded-t-[40px] bg-white px-5 py-20 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32">
-      <h2 className="mb-16 text-center font-black uppercase leading-none tracking-tight text-[#0C0C0C] sm:mb-20 md:mb-28" style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}>
-        Experience
-      </h2>
+      <Built agent="agent/research" color={AGENT_COLORS[3]} className="mx-auto mb-16 w-fit sm:mb-20 md:mb-28">
+        <h2 className="text-center font-black uppercase leading-none tracking-tight text-[#0C0C0C]" style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}>
+          Experience
+        </h2>
+      </Built>
       <div className="mx-auto max-w-5xl">
         {JOBS.map((job, i) => (
           <Fragment key={job.company}>
             {i > 0 && <div style={{ height: 1, background: 'rgba(12, 12, 12, 0.15)' }} />}
-            <FadeIn delay={i * 0.1} className="flex items-start gap-6 py-8 text-[#0C0C0C] sm:gap-10 sm:py-10 md:gap-16 md:py-12">
+            <Built agent="agent/research" color={AGENT_COLORS[i % AGENT_COLORS.length]} className="w-full">
+            <div className="flex items-start gap-6 py-8 text-[#0C0C0C] sm:gap-10 sm:py-10 md:gap-16 md:py-12">
               <span className="font-black leading-none" style={{ fontSize: 'clamp(3rem, 10vw, 140px)' }}>
                 {String(i + 1).padStart(2, '0')}
               </span>
@@ -59,7 +62,8 @@ export default function ExperienceSection() {
                   {job.desc}
                 </p>
               </div>
-            </FadeIn>
+            </div>
+            </Built>
           </Fragment>
         ))}
       </div>

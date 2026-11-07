@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useState } from 'react';
 import { GITHUB, LINKEDIN } from './Buttons';
+import { AGENT_COLORS, Built } from './AgentBuild';
 
 const TYPES = ['All', 'GenAI', 'BI & Dashboards', 'SQL', 'Python & ML'] as const;
 type ProjectType = Exclude<(typeof TYPES)[number], 'All'>;
@@ -23,7 +24,7 @@ const PROJECTS: Project[] = [
     summary: 'Scrapes a brand’s web presence, asks 4 models how they see the brand, scores it 0–100 on 5 criteria and exports a PDF report.',
     types: ['GenAI'],
     stack: ['Python', 'Flask', 'Crawl4AI', 'Ollama'],
-    href: LLM_REPO,
+    href: `${LLM_REPO}/tree/main/Mirra_Ai_visibility_tool`,
   },
   {
     name: 'Google Cloud Gen AI Academy labs',
@@ -37,28 +38,28 @@ const PROJECTS: Project[] = [
     summary: 'Ticket classification and response evaluation for tone, accuracy and resolution across LLM providers.',
     types: ['GenAI'],
     stack: ['Python', 'OpenAI', 'Gemini', 'Ollama'],
-    href: LLM_REPO,
+    href: `${LLM_REPO}/tree/main/Customer_Support_AI_Pipeline`,
   },
   {
     name: 'Multi-model chatbot',
     summary: 'Routes each message to a specialist local model and keeps a rolling-summary memory.',
     types: ['GenAI'],
     stack: ['Python', 'Ollama', 'Streamlit'],
-    href: LLM_REPO,
+    href: `${LLM_REPO}/tree/main/Chatbot_app_v1`,
   },
   {
     name: 'LLM benchmarking',
     summary: 'Compares latency, tokens and output quality of hosted and local models.',
     types: ['GenAI'],
     stack: ['Python', 'Gemini', 'Ollama'],
-    href: LLM_REPO,
+    href: `${LLM_REPO}/tree/main/Comparing_model_token_%26_latency`,
   },
   {
     name: 'n8n resume writer',
     summary: 'Local resume-generation workflow with no external APIs.',
     types: ['GenAI'],
     stack: ['n8n', 'Ollama', 'Llama 3'],
-    href: LLM_REPO,
+    href: `${LLM_REPO}/tree/main/N8N_Resume_rewriter`,
   },
   {
     name: 'Power BI dashboards',
@@ -131,11 +132,14 @@ export default function MoreProjects() {
 
   return (
     <div className="mx-auto mt-24 max-w-6xl md:mt-32">
-      <h3 className="hero-heading mb-8 text-center font-black uppercase leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 6vw, 80px)' }}>
+      <Built agent="agent/planner" color={AGENT_COLORS[2]} className="mx-auto mb-8 w-fit">
+      <h3 className="hero-heading text-center font-black uppercase leading-none tracking-tight" style={{ fontSize: 'clamp(2rem, 6vw, 80px)' }}>
         More projects
       </h3>
+      </Built>
 
-      <div className="mb-10 flex flex-wrap justify-center gap-2 sm:gap-3">
+      <Built agent="agent/router" color={AGENT_COLORS[1]} delay={0.4} className="mx-auto mb-10 w-fit">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
         {TYPES.map((type) => {
           const count = type === 'All' ? PROJECTS.length : PROJECTS.filter((p) => p.types.includes(type)).length;
           const selected = type === active;
@@ -154,10 +158,11 @@ export default function MoreProjects() {
           );
         })}
       </div>
+      </Built>
 
       <motion.div layout className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
-          {visible.map((p) => (
+          {visible.map((p, i) => (
             <motion.a
               layout
               key={p.name}
@@ -168,8 +173,10 @@ export default function MoreProjects() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="group flex flex-col gap-4 rounded-[32px] border-2 border-[#D7E2EA]/25 p-6 transition-colors hover:border-[#D7E2EA]/70"
+              className="group rounded-[32px] border-2 border-[#D7E2EA]/25 transition-colors hover:border-[#D7E2EA]/70"
             >
+              <Built agent="agent/curator" color={AGENT_COLORS[i % AGENT_COLORS.length]} delay={(i % 6) * 0.25} className="h-full w-full">
+              <div className="flex h-full flex-col gap-4 p-6">
               <div className="flex items-start justify-between gap-4">
                 <span className="text-xs font-medium uppercase tracking-widest text-[#B600A8]">{p.types.join(' · ')}</span>
                 <ArrowUpRight size={20} className="shrink-0 text-[#D7E2EA] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -183,6 +190,8 @@ export default function MoreProjects() {
                   </span>
                 ))}
               </div>
+              </div>
+              </Built>
             </motion.a>
           ))}
         </AnimatePresence>
