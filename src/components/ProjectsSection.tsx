@@ -52,7 +52,7 @@ function Card({ project, index, progress }: { project: Project; index: number; p
   const scale = useTransform(progress, [index / total, 1], [1, targetScale]);
 
   return (
-    <div className="sticky top-24 flex h-[85vh] items-start justify-center md:top-32">
+    <div className="sticky top-24 flex min-h-[85vh] items-start justify-center md:top-32">
       <motion.div
         className={`w-full border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8 ${ROUNDED}`}
         style={{ scale, top: `${index * 28}px`, position: 'relative', transformOrigin: 'top center' }}
@@ -125,7 +125,7 @@ export default function ProjectsSection() {
           Projects
         </h2>
       </Built>
-      <div ref={ref} className="mx-auto max-w-6xl">
+      <div ref={ref} className="mx-auto max-w-6xl pb-16">
         {PROJECTS.map((p, i) => (
           <Card key={p.name} project={p} index={i} progress={scrollYProgress} />
         ))}
