@@ -15,7 +15,7 @@ export default function ContactSection() {
       </Built>
       <Built agent="agent/writer" color={AGENT_COLORS[0]} delay={0.4}>
         <p className="max-w-[520px] font-light leading-relaxed text-[#D7E2EA]" style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}>
-          Open to BI, data analyst and analytics engineer roles in Germany. Hybrid, on-site or remote. Available from January 2027.
+          Open to BI, data analyst and analytics engineer roles in Germany. Hybrid, on-site or remote.
         </p>
       </Built>
       <Built agent="agent/router" color={AGENT_COLORS[1]} delay={0.8}>
